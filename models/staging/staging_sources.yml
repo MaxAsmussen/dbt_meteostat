@@ -9,7 +9,7 @@ sources:
       - name: weather_hourly_raw
 
   - name: flights_data
-    schema: public
+    schema: s_maxlennartasmussen
 
     tables:
       - name: flights
