@@ -22,6 +22,6 @@ WITH hourly_raw AS (
                 ,(json_data->>'tsun')::INTEGER AS sun_minutes
                 ,(json_data->>'coco')::INTEGER AS condition_code
         FROM hourly_raw
-    )
-    SELECT * 
-    FROM hourly_data
+)
+SELECT * 
+FROM hourly_data
