@@ -21,7 +21,7 @@ departure_stats AS (
     FROM {{ ref('prep_flights') }}
     GROUP BY origin
 ),
-arrivals_stats AS (
+arrival_stats AS (
     SELECT 
         dest AS airport,
         COUNT(*) AS total_arrivals,
@@ -33,6 +33,8 @@ arrivals_stats AS (
 SELECT
     a.faa AS airport,
     a.name,
+    a.city,
+    a.country,
     COUNT(DISTINCT i.origin) AS unique_inbound_connections,
     COUNT(DISTINCT o.dest) AS unique_outbound_connections,
     ds.total_departures + ars.total_arrivals AS total_planned_flights,
@@ -45,13 +47,16 @@ FROM {{ ref('prep_airports') }} a
 LEFT JOIN inbound i ON i.airport = a.faa
 LEFT JOIN outbound o ON o.airport = a.faa
 LEFT JOIN departure_stats ds ON ds.airport = a.faa
-LEFT JOIN arrivals_stats ars ON ars.airport = a.faa
+LEFT JOIN arrival_stats ars ON ars.airport = a.faa
 GROUP BY 
     a.faa, 
     a.name,
+    a.city,
+    a.country,
     ds.total_departures, 
     ds.total_cancelled,
     ds.total_diverted,
     ars.total_arrivals,
     ars.total_cancelled_arr,
-    ars.total_diverted_arr
+    ars.total_diverted_arr;
+
