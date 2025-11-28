@@ -54,5 +54,4 @@ GROUP BY
     ds.total_diverted,
     ars.total_arrivals,
     ars.total_cancelled_arr,
-    ars.total_diverted_arr
-ORDER BY unique_inbound_connections DESC;
+    ars.total_diverted_arr;
