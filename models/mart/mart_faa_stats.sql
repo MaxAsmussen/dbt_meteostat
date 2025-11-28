@@ -54,4 +54,4 @@ GROUP BY
     ds.total_diverted,
     ars.total_arrivals,
     ars.total_cancelled_arr,
-    ars.total_diverted_arr;
+    ars.total_diverted_arr
