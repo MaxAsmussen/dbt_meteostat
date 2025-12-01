@@ -81,5 +81,3 @@ LEFT JOIN {{ ref('prep_airports') }} a
 
 WHERE w.airport_code IN ('LAX','MIA','JFK')
 
-ORDER BY w.airport_code, w.date
-
