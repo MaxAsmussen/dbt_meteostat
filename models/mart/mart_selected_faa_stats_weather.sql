@@ -1,5 +1,3 @@
-{{ config(materialized='table') }}
-
 WITH daily_flights AS (
     SELECT
         flight_date::date AS date,
@@ -43,7 +41,7 @@ daily_outbound AS (
         origin AS airport,
         COUNT(DISTINCT dest) AS outbound_connections
     FROM {{ ref('prep_flights') }}
-    GROUP_BY flight_date, origin
+    GROUP BY flight_date, origin
 )
 
 SELECT
@@ -80,4 +78,6 @@ LEFT JOIN {{ ref('prep_airports') }} a
     ON a.faa = w.airport_code
 
 WHERE w.airport_code IN ('LAX','MIA','JFK')
+ORDER BY w.airport_code, w.date
+
 
